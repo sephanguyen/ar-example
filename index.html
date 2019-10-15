@@ -15,6 +15,27 @@
 	<script src="threex/threex-artoolkitcontext.js"></script>
 	<script src="threex/threex-arbasecontrols.js"></script>
 	<script src="threex/threex-armarkercontrols.js"></script>
+	<!-- include sphereViewer -->
+	<script src="js/uevent.min.js"></script>
+	<script src="js/doT.min.js"></script>
+	<script src="js/sphereViewer/photo-sphere-viewer.min.js"></script>
+	<link rel="stylesheet" href="js/sphereViewer/photo-sphere-viewer.min.css">
+
+	<style>
+		body {
+			overflow: hidden;
+			margin: 0;
+		}
+
+		.ui {
+			position: absolute;
+		}
+
+		#viewer {
+			width: 100vw;
+			height: 50vh;
+		}
+	</style>
 </head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
@@ -176,8 +197,17 @@
 			render();
 		}
 
-
+		function open360Image() {
+			var viewer = new PhotoSphereViewer({
+				container: 'viewer',
+				panorama:
+					'https://photo-sphere-viewer.js.org/assets/Bryce-Canyon-National-Park-Mark-Doliner.jpg',
+				navbar: ['autorotate', 'zoom', 'fullscreen']
+			});
+		}
 	</script>
+	<button style="right:0;bottom:0" id="open360" class="ui" onclick="open360Image()">OPEN 360 IMAGE</button>
+	<div id="viewer"></div>
 
 </body>
 
