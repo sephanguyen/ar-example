@@ -168,18 +168,9 @@
 			renderer.domElement.style.top = '0px'
 			renderer.domElement.style.left = '0px'
 			document.body.appendChild(renderer.domElement);
-			window.addEventListener('resize', handleWindowResize, false);
 
 		}
 
-		function handleWindowResize() {
-			// cập nhật lại kích thước của renderer và camera
-			HEIGHT = window.innerHeight;
-			WIDTH = window.innerWidth;
-			renderer.setSize(WIDTH, HEIGHT);
-			camera.aspect = WIDTH / HEIGHT;
-			camera.updateProjectionMatrix();
-		}
 
 
 		function update() {
