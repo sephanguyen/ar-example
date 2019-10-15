@@ -33,7 +33,8 @@
 
 		#viewer {
 			width: 100vw;
-			height: 50vh;
+			height: 98vh;
+			z-index: 1;
 		}
 	</style>
 </head>
@@ -54,7 +55,7 @@
 
 		var markerRoot1, markerRoot2;
 
-		var mesh1;
+		var mesh1, viewer;
 
 		initialize();
 		animate();
@@ -127,9 +128,6 @@
 			// setup markerRoots
 			////////////////////////////////////////////////////////////
 
-			let loader = new THREE.TextureLoader();
-			let texture = loader.load('images/border.png');
-
 			let patternArray = ["letterA", "letterB", "letterC", "letterD", "letterF", "kanji", "hiro"];
 			let colorArray = [0xff0000, 0xff8800, 0xffff00, 0x00cc00, 0x0000ff, 0xcc00ff, 0xcccccc];
 			for (let i = 0; i < 7; i++) {
@@ -138,14 +136,6 @@
 				let markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
 					type: 'pattern', patternUrl: "data/" + patternArray[i] + ".patt",
 				});
-
-
-				// let mesh = new THREE.Mesh(
-				// 	new THREE.CubeGeometry(1.25, 1.25, 1.25),
-				// 	new THREE.MeshBasicMaterial({ color: colorArray[i], map: texture, transparent: true, opacity: 0.5 })
-				// );
-				// mesh.position.y = 1.25 / 2;
-				// markerRoot.add(mesh);
 
 				let geometry = new THREE.PlaneBufferGeometry(1, 1, 4, 4);
 				let loader = new THREE.TextureLoader();
@@ -198,15 +188,26 @@
 		}
 
 		function open360Image() {
-			var viewer = new PhotoSphereViewer({
-				container: 'viewer',
-				panorama:
-					'https://photo-sphere-viewer.js.org/assets/Bryce-Canyon-National-Park-Mark-Doliner.jpg',
-				navbar: ['autorotate', 'zoom', 'fullscreen']
-			});
+			document.getElementById("viewer").style.display = '';
+			if (!viewer) {
+				viewer = new PhotoSphereViewer({
+					container: 'viewer',
+					panorama:
+						'https://photo-sphere-viewer.js.org/assets/Bryce-Canyon-National-Park-Mark-Doliner.jpg',
+					navbar: ['autorotate', 'zoom', 'fullscreen']
+				});
+			}
+
+		}
+		function closeImage() {
+			document.getElementById("viewer").style.display = "none";
+
 		}
 	</script>
-	<button style="right:0;bottom:0" id="open360" class="ui" onclick="open360Image()">OPEN 360 IMAGE</button>
+	<button style="right:0;bottom:0;z-index: 2;" id="open360" class="ui" onclick="open360Image()">OPEN 360
+		IMAGE</button>
+	<button style="bottom:0;z-index: 2" id="closeImage" class="ui" onclick="closeImage()">Close IMAGE</button>
+
 	<div id="viewer"></div>
 
 </body>
