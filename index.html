@@ -38,24 +38,26 @@
 		animate();
 
 		function initialize() {
-			scene = new THREE.Scene();
+			// scene = new THREE.Scene();
 
-			let ambientLight = new THREE.AmbientLight(0xcccccc, 1.0);
-			scene.add(ambientLight);
+			// let ambientLight = new THREE.AmbientLight(0xcccccc, 1.0);
+			// scene.add(ambientLight);
 
-			camera = new THREE.Camera();
-			scene.add(camera);
+			// camera = new THREE.Camera();
+			// scene.add(camera);
 
-			renderer = new THREE.WebGLRenderer({
-				antialias: true,
-				alpha: true
-			});
-			renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-			renderer.setSize(640, 480);
-			renderer.domElement.style.position = 'absolute'
-			renderer.domElement.style.top = '0px'
-			renderer.domElement.style.left = '0px'
-			document.body.appendChild(renderer.domElement);
+			// renderer = new THREE.WebGLRenderer({
+			// 	antialias: true,
+			// 	alpha: true
+			// });
+			// renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+			// renderer.setSize(640, 480);
+			// renderer.domElement.style.position = 'absolute'
+			// renderer.domElement.style.top = '0px'
+			// renderer.domElement.style.left = '0px'
+			// document.body.appendChild(renderer.domElement);
+			createScene();
+
 
 			clock = new THREE.Clock();
 			deltaTime = 0;
@@ -138,6 +140,45 @@
 							markerRoot1.add(mesh0);
 						}, onProgress, onError);
 				});
+
+
+		}
+
+		function createScene() {
+			// width, height screen,
+			HEIGHT = window.innerHeight;
+			WIDTH = window.innerWidth;
+
+			//create scene
+			scene = new THREE.Scene();
+
+			let ambientLight = new THREE.AmbientLight(0xcccccc, 1.0);
+			scene.add(ambientLight);
+
+			camera = new THREE.Camera();
+			scene.add(camera);
+
+			renderer = new THREE.WebGLRenderer({
+				antialias: true,
+				alpha: true
+			});
+			renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+			renderer.setSize(WIDTH, HEIGHT);
+			renderer.domElement.style.position = 'absolute'
+			renderer.domElement.style.top = '0px'
+			renderer.domElement.style.left = '0px'
+			document.body.appendChild(renderer.domElement);
+			window.addEventListener('resize', handleWindowResize, false);
+
+		}
+
+		function handleWindowResize() {
+			// cập nhật lại kích thước của renderer và camera
+			HEIGHT = window.innerHeight;
+			WIDTH = window.innerWidth;
+			renderer.setSize(WIDTH, HEIGHT);
+			camera.aspect = WIDTH / HEIGHT;
+			camera.updateProjectionMatrix();
 		}
 
 
