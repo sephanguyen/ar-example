@@ -146,13 +146,13 @@
 				markerRoot.add(mesh);
 
 				new THREE.MTLLoader()
-					.setPath('models/')
-					.load('fish-2.mtl', function (materials) {
+					.setPath('models/rose/')
+					.load('rose.mtl', function (materials) {
 						materials.preload();
 						new THREE.OBJLoader()
 							.setMaterials(materials)
-							.setPath('models/')
-							.load('fish-2.obj', function (group) {
+							.setPath('models/rose/')
+							.load('rose.obj', function (group) {
 								mesh0 = group.children[0];
 								mesh0.material.side = THREE.DoubleSide;
 								mesh0.position.y = 0.25;
