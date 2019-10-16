@@ -146,6 +146,7 @@
 				markerRoot.add(mesh);
 
 				new THREE.MTLLoader()
+					.setTexturePath('models/rose/')
 					.setPath('models/rose/')
 					.load('rose.mtl', function (materials) {
 						materials.preload();
