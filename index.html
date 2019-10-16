@@ -154,12 +154,15 @@
 							.setMaterials(materials)
 							.setPath('models/rose/')
 							.load('rose.obj', function (group) {
-								mesh0 = group.children[0];
-								console.log(group.children)
-								mesh0.material.side = THREE.DoubleSide;
-								mesh0.position.y = 0.25;
-								mesh0.scale.set(0.25, 0.25, 0.25);
-								markerRoot.add(group.children);
+								for (let i = 0; i < group.children.length; i++) {
+									mesh0 = group.children[i];
+
+									mesh0.material.side = THREE.DoubleSide;
+									mesh0.position.y = 0.25;
+									mesh0.scale.set(0.25, 0.25, 0.25);
+									markerRoot.add(mesh0);
+								}
+
 							}, onProgress, onError);
 					});
 
